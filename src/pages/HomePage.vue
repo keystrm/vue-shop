@@ -46,8 +46,27 @@
     </div>
 </template>
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import ProductCard from '../components/ProductCard.vue'
 import CategoryList from '../components/home-page/CategoryList.vue'
+import axios from 'axios'
+
+const getCategories = async() => {
+    try {
+        const response = await axios.get('https://fakestoreapi.com/products/categories');
+        if(response?.data){
+            console.log(response.data)
+        }
+        console.log(response)
+    } catch (error) {
+        console.error(error)
+        
+    }
+}
+
+onMounted(async()=>{
+    await getCategories()
+})
 
 
 </script>
