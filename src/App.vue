@@ -7,7 +7,7 @@ const store = useCounterStore();
 
 <template>
 <h1 @click="store.increment"> {{ store.count }}</h1>
- 
+<RouterView/>
 </template>
 
 <style scoped>
