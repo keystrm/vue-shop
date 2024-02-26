@@ -3,7 +3,7 @@
     <div class="flex flex-wrap md:flex-nowrap">
         <!-- Side Pane for Product Categories -->
         <div class="md:w-1/4 p-4 bg-white hidden md:block">
-            <CategoryList/>
+            <CategoryList :category-list="categoryList"/>
         </div>
 
         <!-- Main Area for Product List 1 -->
@@ -46,16 +46,18 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import ProductCard from '../components/ProductCard.vue'
 import CategoryList from '../components/home-page/CategoryList.vue'
 import axios from 'axios'
+
+const categoryList = ref<Array<string>>([])
 
 const getCategories = async() => {
     try {
         const response = await axios.get('https://fakestoreapi.com/products/categories');
         if(response?.data){
-            console.log(response.data)
+            categoryList.value = response.data
         }
         console.log(response)
     } catch (error) {
