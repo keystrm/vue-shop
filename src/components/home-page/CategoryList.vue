@@ -9,13 +9,19 @@
 
 <script setup lang="ts">
 
-import { ref,PropType } from 'vue';
+import { ref,PropType, watch } from 'vue';
 
 const selectedCategory = ref<string>('')
 
 const props = defineProps({
     title: {type: String , defualt:""},
     categoryList: {type: Object as PropType<Array<string>> , defualt:[]},
+})
+
+const emits = defineEmits(['changeSelectedCategory'])
+
+watch(selectedCategory,()=>{
+    emits('changeSelectedCategory',selectedCategory.value)
 })
 
 </script>
