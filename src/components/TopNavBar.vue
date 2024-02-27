@@ -11,9 +11,9 @@
                     </div>
                     <!-- Primary Navbar items -->
                     <div class="hidden md:flex items-center space-x-1">
-                        <router-link to="/" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Home</router-link>
-                        <router-link to="/shop" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Shop</router-link>
-                        <router-link to="/contact-us" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</router-link>
+                        <router-link to="/" active-class="text-green-500 border-b-4 border-green-500" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 hover:border-green-500 transition duration-300">Home</router-link>
+                        <router-link to="/shop" active-class="text-green-500 border-b-4 border-green-500" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 hover:border-green-500 transition duration-300">Shop</router-link>
+                        <router-link to="/contact-us" active-class="text-green-500 border-b-4 border-green-500" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 hover:border-green-500 transition duration-300">Contact Us</router-link>
                     </div>
                 </div>
                 <!-- Mobile menu button -->
@@ -37,9 +37,9 @@
         <!-- mobile menu -->
         <div class="hidden mobile-menu">
             <ul class="">
-                <li><router-link to="/" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Home</router-link></li>
-                <li><router-link to="/shop" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Shop</router-link></li>
-                <li><router-link to="/contact-us" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</router-link></li>
+                <li><router-link to="/" active-class="text-white bg-green-500" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Home</router-link></li>
+                <li><router-link to="/shop" active-class="text-white bg-green-500" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Shop</router-link></li>
+                <li><router-link to="/contact-us" active-class="text-white bg-green-500" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</router-link></li>
             </ul>
         </div>
     </nav>
