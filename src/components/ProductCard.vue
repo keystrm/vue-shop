@@ -42,3 +42,8 @@ import Dialog from 'primevue/dialog';
 const visible = ref(false);
 
 </script>
+<style scoped>
+.p-text-secondary{
+    color: red;
+}
+</style>
