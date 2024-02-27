@@ -13,7 +13,7 @@
             </div>
             <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <!-- Product Card -->
-                <ProductCard v-for="product in productList" :key="product.id"/>
+                <ProductCard v-for="product in productList" :key="product.id" :product="product"/>
                 <!-- Repeat Product Card for each product -->
             </div>
         </div>
@@ -21,24 +21,13 @@
     </div>
 </template>
 <script setup lang="ts">
-export interface Rating{
-    count:number,
-    rate:number
-}
-export interface Product{
-    category:string,
-    description:string,
-    id:number,
-    image:string,
-    price:number,
-    rating:Rating,
-    title:string,
-}
+
 
 import { onMounted, ref } from 'vue';
 import ProductCard from '../components/ProductCard.vue'
 import CategoryList from '../components/home-page/CategoryList.vue'
 import axios from 'axios'
+import Product from '../types/Product'
 
 const categoryList = ref<Array<string>>([])
 const productList = ref<Array<Product>>([])

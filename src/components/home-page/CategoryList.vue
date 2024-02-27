@@ -13,7 +13,7 @@ import { ref,PropType, watch } from 'vue';
 
 const selectedCategory = ref<string>('')
 
-const props = defineProps({
+defineProps({
     title: {type: String , defualt:""},
     categoryList: {type: Object as PropType<Array<string>> , defualt:[]},
 })
