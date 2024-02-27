@@ -8,7 +8,10 @@
 
         <!-- Main Area for Product List 1 -->
         <div class="w-full md:flex-1 p-4 tabcontent">
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div v-if="loading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                Loading...........
+            </div>
+            <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <!-- Product Card -->
                 <ProductCard v-for="product in productList" :key="product.id"/>
                 <!-- Repeat Product Card for each product -->
@@ -39,6 +42,7 @@ import axios from 'axios'
 
 const categoryList = ref<Array<string>>([])
 const productList = ref<Array<Product>>([])
+const loading = ref<boolean>(false)
 
 const getCategories = async () => {
     try {
@@ -59,6 +63,7 @@ const getCategoryRelatedProducts = async (category: string) => {
         if (!url) {
             throw new Error('invalid url')
         }
+        loading.value = true
 
         const response = await axios.get(url);
 
@@ -67,10 +72,11 @@ const getCategoryRelatedProducts = async (category: string) => {
         }
 
         productList.value = response.data;
-        console.log()
+        loading.value = false
 
     } catch (error) {
         console.error(error)
+        loading.value = false
     }
 }
 
