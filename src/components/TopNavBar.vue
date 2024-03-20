@@ -14,6 +14,8 @@
                         <router-link to="/" active-class="text-green-500 border-b-4 border-green-500" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 hover:border-green-500 transition duration-300">Home</router-link>
                         <router-link to="/shop" active-class="text-green-500 border-b-4 border-green-500" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 hover:border-green-500 transition duration-300">Shop</router-link>
                         <router-link to="/contact-us" active-class="text-green-500 border-b-4 border-green-500" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 hover:border-green-500 transition duration-300">Contact Us</router-link>
+                        <router-link to="/gallery" active-class="text-green-500 border-b-4 border-green-500" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 hover:border-green-500 transition duration-300">Gallery</router-link>
+
                     </div>
                 </div>
                 <!-- Mobile menu button -->
