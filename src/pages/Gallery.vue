@@ -10,40 +10,47 @@
 
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, nextTick } from 'vue';
 import { throttle } from 'lodash'; // Assuming you're using lodash for throttling
 
 
 const items = ref([]);
 const loaderRef = ref(null);
 const nextStart = ref(0);
+const loadQueue = ref([]); // Queue to manage loading items
+const loadRate = 1000; // Adjust based on API rate limit (1000ms = 1 second)
 
 const loadImageForItem = async (itemId) => {
+  // Function to load image for a specific item
   const imageUrl = `https://picsum.photos/200/300?random=${itemId}`;
-
-  const item = items.value.find(item => item.id === itemId);
-  if (item) {
-    item.imageUrl = imageUrl;
+  const index = items.value.findIndex(item => item.id === itemId);
+  if (index !== -1) {
+    items.value[index].imageUrl = imageUrl;
+    // Force update for reactivity
+    items.value = [...items.value];
   }
 };
 
-// Throttle function to only allow 1 call per second (1000 milliseconds)
-const throttledLoadImageForItem = throttle(loadImageForItem, 1000);
+const processQueue = () => {
+  if (loadQueue.value.length > 0) {
+    const itemId = loadQueue.value.shift(); // Remove the first item from the queue
+    loadImageForItem(itemId); // Load the item's image
+  }
+};
 
 const loadItems = async () => {
+  // Your existing logic to load item IDs, then push IDs to loadQueue
   const newItems = Array.from({ length: 10 }, (_, index) => ({
     id: nextStart.value + index,
-    imageUrl: null,
+    imageUrl: null, // Images start out not loaded
   }));
 
   items.value.push(...newItems);
   nextStart.value += newItems.length;
-
-  newItems.forEach(item => {
-    throttledLoadImageForItem(item.id);
-  });
+  
+  // Add new item IDs to the load queue
+  newItems.forEach(item => loadQueue.value.push(item.id));
 };
-
 
 
 
@@ -56,8 +63,11 @@ const observer = new IntersectionObserver(
   { rootMargin: '100px' }
 );
 
-onMounted(() => {
-  loadItems();
+onMounted(async() => {
+  await loadItems();
+  nextTick(() => {
+    setInterval(processQueue, loadRate); // Process one item every loadRate milliseconds
+  });
 });
 
 watch(loaderRef, (newValue, oldValue) => {
